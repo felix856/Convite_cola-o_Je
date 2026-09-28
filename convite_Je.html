@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Um convite para a Je 💕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#2a1a3a;
+  --plum:#5b3a6b;
+  --rose:#e8a0b4;
+  --apricot:#f6c28b;
+  --paper:#fff7f0;
+  --ink:#3a2340;
+  --muted:#7d6680;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;min-height:100%;
+  display:flex;align-items:center;justify-content:center;
+  padding:max(24px,env(safe-area-inset-top)) 18px max(24px,env(safe-area-inset-bottom));
+  font-family:var(--sans);color:var(--ink);
+  background:linear-gradient(180deg,#2a1a3a 0%,#5b3a6b 38%,#c9788f 68%,#f6c28b 100%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+
+/* ---------- céu do fim de tarde ---------- */
+.sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sun{
+  position:absolute;left:50%;bottom:-18vmin;width:62vmin;height:62vmin;border-radius:50%;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,#ffe2b8 0%,#f6c28b 45%,#f6c28b00 70%);
+  animation:sunset 2.8s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes sunset{from{bottom:6vmin;opacity:.4}to{bottom:-18vmin;opacity:1}}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:0;animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0}50%{opacity:.8}}
+
+/* ---------- cartão principal ---------- */
+.card{
+  position:relative;z-index:1;
+  width:min(100%,560px);
+  background:var(--paper);
+  border-radius:6px 6px 28px 28px;
+  padding:44px 36px 32px;
+  box-shadow:0 30px 80px #1a0e2466,0 2px 0 #ffffff inset;
+  animation:rise .9s .3s cubic-bezier(.2,.7,.2,1) both;
+}
+.card::before{ /* borda picotada no topo, como um ingresso */
+  content:"";position:absolute;left:0;right:0;top:-8px;height:16px;
+  background:radial-gradient(circle at 8px 0,transparent 7px,var(--paper) 7.5px) 0 0/16px 16px repeat-x;
+}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+.easter{
+  position:absolute;right:16px;top:14px;width:36px;height:36px;border:0;border-radius:50%;
+  background:transparent;cursor:pointer;font-size:17px;opacity:.3;transition:opacity .2s,transform .2s
+}
+.easter:hover,.easter:focus-visible{opacity:1;transform:rotate(-12deg)}
+
+.intro{font-family:var(--serif);font-style:italic;font-weight:500;font-size:20px;color:var(--muted);margin:0}
+h1{
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(64px,18vw,104px);line-height:.95;letter-spacing:-.01em;
+  margin:6px 0 4px;color:var(--ink);position:relative;display:inline-block
+}
+.scribble{position:absolute;left:-4%;bottom:-6px;width:108%;height:22px;overflow:visible}
+.scribble path{
+  fill:none;stroke:var(--rose);stroke-width:4;stroke-linecap:round;
+  stroke-dasharray:260;stroke-dashoffset:260;animation:draw 1.1s 1.2s ease-out forwards
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+.lead{font-family:var(--serif);font-weight:500;font-size:25px;line-height:1.3;margin:18px 0 14px}
+.subtitle{font-size:15.5px;line-height:1.7;color:var(--muted);margin:0 0 28px;max-width:46ch}
+
+/* linha do tempo: 17h -> 18h30 */
+.timeline{list-style:none;margin:0 0 26px;padding:0;position:relative}
+.timeline::before{
+  content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(var(--plum),var(--rose));border-radius:2px
+}
+.timeline li{position:relative;padding:0 0 18px 34px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{
+  content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;
+  background:var(--paper);border:3px solid var(--plum)
+}
+.timeline li.you::before{border-color:var(--rose);background:var(--rose)}
+.time{font-family:var(--serif);font-weight:600;font-size:23px;display:block;line-height:1.2}
+.what{font-size:14.5px;color:var(--muted);line-height:1.5}
+
+.place{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:14px;background:#f6e9e6;
+  font-size:14px;line-height:1.45;margin-bottom:26px
+}
+.place span:first-child{font-size:22px}
+.place b{display:block;font-weight:600}
+
+.mainbtn{
+  width:100%;padding:18px 24px;border:0;border-radius:999px;
+  background:var(--ink);color:var(--paper);
+  font:600 16px var(--sans);cursor:pointer;
+  box-shadow:0 12px 28px #3a234040;transition:transform .15s,box-shadow .15s
+}
+.mainbtn:hover{transform:translateY(-2px);box-shadow:0 16px 34px #3a234055}
+.tiny{margin-top:16px;font-size:15px;color:#a8929f;text-align:center;font-style:italic;font-family:var(--serif)}
+
+/* ---------- modal ---------- */
+.modal{
+  position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;
+  padding:20px;background:#1f1229b3;backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s
+}
+.modal.show{opacity:1;visibility:visible}
+.modalbox{
+  position:relative;width:min(100%,480px);max-height:90vh;overflow-y:auto;
+  background:var(--paper);border-radius:28px;padding:30px 26px 22px;text-align:center;
+  box-shadow:0 30px 90px #0006;
+  transform:translateY(20px) scale(.97);transition:transform .35s cubic-bezier(.2,.7,.2,1)
+}
+.modal.show .modalbox{transform:none}
+
+.progress{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+.progress i{width:26px;height:4px;border-radius:4px;background:#ecdde2;transition:background .3s,width .3s}
+.progress i.on{background:var(--rose)}
+.progress i.now{width:40px;background:var(--plum)}
+
+.step{display:none}
+.step.active{display:block;animation:stepIn .4s cubic-bezier(.2,.7,.2,1)}
+@keyframes stepIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+
+.emoji{font-size:40px;line-height:1}
+.modal h2{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.15;margin:10px 0 8px}
+.modal p{line-height:1.6;color:var(--muted);margin:8px 0}
+
+.quote-box{
+  margin:20px 0;padding:22px 20px;border-radius:18px;
+  background:linear-gradient(135deg,#fbe7ec,#fdefe2);
+  font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.6;color:var(--ink);text-align:left
+}
+.quote-box span{display:block}
+.quote-box span:last-child{font-style:italic;color:var(--plum)}
+
+.field-group{margin:16px 0;text-align:left}
+.field-group label{display:block;font-size:14px;font-weight:600;margin-bottom:7px}
+.field-group input{
+  width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid #e6d3db;background:#fff;
+  font:15px var(--sans);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s
+}
+.field-group input:focus{border-color:var(--rose);box-shadow:0 0 0 4px #e8a0b433}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{
+  border:1px solid #e6d3db;background:#fff;border-radius:999px;padding:6px 12px;
+  font:13px var(--sans);color:var(--muted);cursor:pointer;transition:all .15s
+}
+.chip:hover{border-color:var(--rose);color:var(--ink)}
+
+.btn-next{
+  margin-top:14px;padding:15px 30px;border:0;border-radius:999px;
+  background:var(--ink);color:var(--paper);font:600 15px var(--sans);cursor:pointer;
+  transition:transform .15s
+}
+.btn-next:hover{transform:translateY(-2px)}
+
+.choices{position:relative;height:110px;margin-top:22px}
+.choice{border:0;border-radius:999px;padding:15px 24px;cursor:pointer;font:600 15px var(--sans)}
+.yes{background:var(--ink);color:var(--paper);position:absolute;left:50%;top:0;transform:translateX(calc(-100% - 8px))}
+.no{
+  background:#f1e3e8;color:var(--ink);position:absolute;left:50%;top:0;transform:translateX(8px);
+  transition:left .2s cubic-bezier(.3,1.6,.5,1),top .2s cubic-bezier(.3,1.6,.5,1)
+}
+.answer{min-height:22px;font-size:14px;font-weight:600;color:var(--plum)}
+
+.summary{
+  margin:18px 0 6px;padding:18px;border-radius:18px;background:#fbeee8;text-align:left;
+  display:grid;gap:12px
+}
+.summary div{display:flex;gap:12px;align-items:baseline;font-size:15px}
+.summary small{display:block;color:var(--muted);font-size:12.5px}
+.summary b{font-family:var(--serif);font-weight:600;font-size:21px}
+
+.close{margin-top:16px;border:0;background:none;color:#a8929f;cursor:pointer;font:14px var(--sans);padding:8px}
+.close:hover{color:var(--ink)}
+
+:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+
+/* confete de corações */
+.burst{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}
+.burst span{position:absolute;top:-40px;font-size:22px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(var(--r))}}
+
+@media(max-width:480px){
+  .card{padding:40px 24px 26px}
+  .lead{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+  .scribble path{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true"><div class="sun"></div></div>
+
+<main class="card">
+  <button class="easter" id="secret" aria-label="Easter egg">👀</button>
+
+  <p class="intro">um convite para você,</p>
+  <h1>Je.
+    <svg class="scribble" viewBox="0 0 200 22" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 14 C 40 4, 80 20, 120 10 S 180 6, 196 12"/>
+    </svg>
+  </h1>
+
+  <p class="lead">Amanhã tem uma conquista importante pra mim: minha colação de Análise e Desenvolvimento de Sistemas.</p>
+  <p class="subtitle">E eu queria aproveitar a ocasião para fazer um convite que não precisa acontecer amanhã.</p>
+
+  <ol class="timeline">
+    <li>
+      <span class="time">17h</span>
+      <span class="what">🎓 Começa a colação</span>
+    </li>
+    <li class="you">
+      <span class="time">18h30</span>
+      <span class="what">👀 Você disse que consegue me ver por volta desse horário</span>
+    </li>
+  </ol>
+
+  <div class="place">
+    <span aria-hidden="true">📍</span>
+    <span><b>Faculdade Municipal de Palhoça</b>Análise e Desenvolvimento de Sistemas</span>
+  </div>
+
+  <button class="mainbtn" id="open">Tem uma pergunta aqui</button>
+  <div class="tiny">PS: existe uma coisa escondida nesse convite.</div>
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="title1">
+  <div class="modalbox">
+    <div class="progress" id="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+    <!-- ETAPA 1: O pedido -->
+    <div class="step active" id="step1">
+      <div class="emoji">✨</div>
+      <h2 id="title1">Já que você vai me ver...</h2>
+      <div class="quote-box">
+        <span>Você escolhe o dia.</span>
+        <span>Você escolhe a comida.</span>
+        <span>Eu busco você.</span>
+        <span>O resto deixa comigo. ❤️</span>
+      </div>
+      <p>Topa um date nesse estilo?</p>
+      <button class="btn-next" id="next2">Com certeza! 😉</button>
+    </div>
+
+    <!-- ETAPA 2: Dia e comida -->
+    <div class="step" id="step2">
+      <div class="emoji">🍕</div>
+      <h2>Sua escolha</h2>
+      <div class="field-group">
+        <label for="dia">Qual o melhor dia para você?</label>
+        <input type="text" id="dia" placeholder="Ex: sexta-feira, final de semana...">
+        <div class="chips" data-for="dia">
+          <button type="button" class="chip">Sexta</button>
+          <button type="button" class="chip">Sábado</button>
+          <button type="button" class="chip">Domingo</button>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="comida">O que você quer comer ou fazer?</label>
+        <input type="text" id="comida" placeholder="Ex: japonesa, café, piquenique...">
+        <div class="chips" data-for="comida">
+          <button type="button" class="chip">Japonesa 🍣</button>
+          <button type="button" class="chip">Pizza 🍕</button>
+          <button type="button" class="chip">Hambúrguer 🍔</button>
+          <button type="button" class="chip">Massa 🍝</button>
+          <button type="button" class="chip">Café ☕</button>
+          <button type="button" class="chip">Piquenique 🧺</button>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="lugar">Tem algum lugar que você gostaria de ir?</label>
+        <input type="text" id="lugar" placeholder="Ex: aquele restaurante, uma praia, um parque...">
+      </div>
+      <button class="btn-next" id="next3">Próximo passo</button>
+    </div>
+
+    <!-- ETAPA 3: Onde buscar -->
+    <div class="step" id="step3">
+      <div class="emoji">🚗</div>
+      <h2>Eu busco você</h2>
+      <p>Como prometido, o cavalheiro busca. Onde devo te pegar?</p>
+      <div class="field-group">
+        <label for="local">Onde te busco?</label>
+        <input type="text" id="local" placeholder="Ex: na sua casa, no trabalho...">
+      </div>
+      <button class="btn-next" id="next4">Ir para a confirmação</button>
+    </div>
+
+    <!-- ETAPA 4: Confirmação com botão fujão -->
+    <div class="step" id="step4">
+      <div class="emoji">👀</div>
+      <h2>Tudo pronto?</h2>
+      <p>Só falta a confirmação oficial:</p>
+      <div class="choices">
+        <button class="choice yes" id="yes">Fechado! ❤️</button>
+        <button class="choice no" id="no">Pensando bem... 😌</button>
+      </div>
+      <div class="answer" id="answer" aria-live="polite"></div>
+    </div>
+
+    <!-- ETAPA FINAL -->
+    <div class="step" id="stepFinal">
+      <div class="emoji">🎉</div>
+      <h2>Combinado!</h2>
+      <div class="summary" id="summary"></div>
+      <p>O resto deixa comigo. ❤️</p>
+    </div>
+
+    <button class="close" id="close">Fechar</button>
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById('modal');
+const no = document.getElementById('no');
+const answer = document.getElementById('answer');
+const bars = document.querySelectorAll('#progress i');
+
+// estrelas no céu
+const sky = document.querySelector('.sky');
+for (let i = 0; i < 40; i++) {
+  const s = document.createElement('i');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 45 + '%';
+  s.style.animationDelay = (Math.random() * 4) + 's';
+  sky.appendChild(s);
+}
+
+function goToStep(step) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+  const n = step === 'Final' ? 5 : step;
+  bars.forEach((b, i) => {
+    b.classList.toggle('on', i < n - 1 || n === 5);
+    b.classList.toggle('now', i === n - 1);
+  });
+  document.getElementById('progress').style.visibility = n === 5 ? 'hidden' : 'visible';
+  if (step === 4) resetNo();
+}
+
+// sugestões rápidas preenchem o campo
+document.querySelectorAll('.chips').forEach(group => {
+  group.addEventListener('click', e => {
+    if (!e.target.classList.contains('chip')) return;
+    document.getElementById(group.dataset.for).value = e.target.textContent.replace(/\s*\p{Extended_Pictographic}/gu, '').trim();
+  });
+});
+
+// Botão fujão
+function resetNo() {
+  no.style.left = '50%'; no.style.top = '0'; no.style.transform = 'translateX(8px)';
+  answer.textContent = '';
+}
+function moveNo() {
+  const box = document.querySelector('.choices');
+  const maxX = Math.max(0, box.clientWidth - no.offsetWidth);
+  const maxY = Math.max(0, box.clientHeight - no.offsetHeight);
+  no.style.transform = 'none';
+  no.style.left = Math.random() * maxX + 'px';
+  no.style.top = Math.random() * maxY + 'px';
+  answer.textContent = 'Opa! Esse botão não é uma opção 😂';
+}
+no.addEventListener('mouseenter', moveNo);
+no.addEventListener('touchstart', e => { e.preventDefault(); moveNo(); }, { passive: false });
+no.addEventListener('click', moveNo);
+no.addEventListener('focus', moveNo);
+
+document.getElementById('next2').onclick = () => goToStep(2);
+document.getElementById('next3').onclick = () => goToStep(3);
+document.getElementById('next4').onclick = () => goToStep(4);
+
+// escapa o texto digitado antes de colocar na tela
+const esc = t => t.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function hearts() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layer = document.createElement('div');
+  layer.className = 'burst';
+  const icons = ['❤️','💕','✨','💖','🌸'];
+  for (let i = 0; i < 36; i++) {
+    const h = document.createElement('span');
+    h.textContent = icons[i % icons.length];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (16 + Math.random() * 20) + 'px';
+    h.style.animationDuration = (2.2 + Math.random() * 2) + 's';
+    h.style.animationDelay = (Math.random() * .8) + 's';
+    h.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+    layer.appendChild(h);
+  }
+  document.body.appendChild(layer);
+  setTimeout(() => layer.remove(), 5000);
+}
+
+document.getElementById('yes').onclick = () => {
+  const dia = document.getElementById('dia').value.trim() || 'um dia perfeito';
+  const comida = document.getElementById('comida').value.trim() || 'algo delicioso';
+  const lugar = document.getElementById('lugar').value.trim() || 'surpresa, eu escolho';
+  const local = document.getElementById('local').value.trim() || 'onde você estiver';
+
+  const mensagem = encodeURIComponent(
+    `❤️ Novo convite confirmado!\n\n📅 Dia: ${dia}\n🍽️ Comida: ${comida}\n🗺️ Lugar: ${lugar}\n📍 Local para buscar: ${local}`
+  );
+
+  // Número com 55 + DDD + número, sem símbolos.
+  const meuWhatsApp = '5548991236653';
+  window.open(`https://wa.me/${meuWhatsApp}?text=${mensagem}`, '_blank');
+
+  document.getElementById('summary').innerHTML = `
+    <div><span>📅</span><span><small>Dia</small><b>${esc(dia)}</b></span></div>
+    <div><span>🍽️</span><span><small>Comida ou programa</small><b>${esc(comida)}</b></span></div>
+    <div><span>🗺️</span><span><small>Lugar</small><b>${esc(lugar)}</b></span></div>
+    <div><span>🚗</span><span><small>Eu te busco em</small><b>${esc(local)}</b></span></div>`;
+
+  goToStep('Final');
+  hearts();
+};
+
+function openModal(title) {
+  goToStep(1);
+  document.getElementById('title1').textContent = title;
+  modal.classList.add('show');
+  setTimeout(() => document.getElementById('next2').focus(), 300);
+}
+document.getElementById('open').onclick = () => openModal('Já que você vai me ver...');
+document.getElementById('secret').onclick = () => openModal('Achou o easter egg 👀');
+
+const closeModal = () => modal.classList.remove('show');
+document.getElementById('close').onclick = closeModal;
+modal.onclick = e => { if (e.target === modal) closeModal(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
